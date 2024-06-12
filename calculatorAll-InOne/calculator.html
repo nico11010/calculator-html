@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simple</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .calculator {
+            display: flex;
+            flex-direction: column;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .display {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .display input {
+            width: 95%;
+            height: 60px;
+            padding: 10px;
+            font-size: 32px;
+            border: none;
+            border-radius: 5px;
+            text-align: right;
+            background-color: #333;
+            color: #fff;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .btn {
+            width: 100%;
+            height: 60px;
+            font-size: 24px;
+            background-color: #444;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: #555;
+        }
+        
+        .equal {
+            background-color: #ff5722;
+            color: #fff;
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+        
+        .equal:hover {
+            background-color: #e64a19;
+        }
+        
+        .zero {
+            grid-column: span 2;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="result" readonly>
+        </div>
+        <div class="buttons">
+            <button class="btn" onclick="clearEntry()">C</button>
+            <button class="btn" onclick="clearDisplay()">CA</button>
+            <button class="btn" onclick="calculateSquareRoot()">√</button>
+            <button class="btn" onclick="appendCharacter('/')">/</button>
+            <button class="btn" onclick="appendCharacter('7')">7</button>
+            <button class="btn" onclick="appendCharacter('8')">8</button>
+            <button class="btn" onclick="appendCharacter('9')">9</button>
+            <button class="btn" onclick="appendCharacter('*')">*</button>
+            <button class="btn" onclick="appendCharacter('4')">4</button>
+            <button class="btn" onclick="appendCharacter('5')">5</button>
+            <button class="btn" onclick="appendCharacter('6')">6</button>
+            <button class="btn" onclick="appendCharacter('-')">-</button>
+            <button class="btn" onclick="appendCharacter('1')">1</button>
+            <button class="btn" onclick="appendCharacter('2')">2</button>
+            <button class="btn" onclick="appendCharacter('3')">3</button>
+            <button class="btn" onclick="appendCharacter('+')">+</button>
+            <button class="btn zero" onclick="appendCharacter('0')">0</button>
+            <button class="btn" onclick="appendCharacter('.')">.</button>
+            <button class="btn equal" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+    
+    <script>
+        function clearDisplay() {
+            document.getElementById("result").value = "";
+        }
+        
+        function clearEntry() {
+            let display = document.getElementById("result");
+            display.value = "";
+        }
+        
+        function appendCharacter(character) {
+            let display = document.getElementById("result");
+            display.value += character;
+        }
+        
+        function calculateResult() {
+            let display = document.getElementById("result");
+            try {
+                display.value = eval(display.value);
+            } catch (e) {
+                display.value = "Error";
+            }
+        }
+        
+        function calculateSquareRoot() {
+            let display = document.getElementById("result");
+            try {
+                display.value = Math.sqrt(eval(display.value));
+            } catch (e) {
+                display.value = "Error";
+            }
+        }
+        
+    </script>
+
+</body>
+</html>
